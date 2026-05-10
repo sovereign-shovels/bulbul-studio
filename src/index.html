@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bulbul-studio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px;
+    }
+    h1 { font-size: 1.25rem; margin-bottom: 4px; }
+    .subtitle { color: var(--muted); font-size: 0.875rem; margin-bottom: 24px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card h2 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.875rem;
+    }
+    label span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-family: inherit;
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .row { display: flex; gap: 12px; }
+    .row > * { flex: 1; }
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.9; }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .status {
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--bg);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      min-height: 40px;
+    }
+    audio { width: 100%; margin-top: 12px; }
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>bulbul-studio</h1>
+  <p class="subtitle">Desktop TTS for 10 Indic languages</p>
+
+  <div class="card">
+    <h2>Text</h2>
+    <label>
+      <span>Enter text to speak</span>
+      <textarea id="text-input" placeholder="Type or paste text here..."></textarea>
+    </label>
+  </div>
+
+  <div class="card">
+    <h2>Voice</h2>
+    <div class="row">
+      <label>
+        <span>Language</span>
+        <select id="language">
+          <option value="hi-IN">Hindi (hi-IN)</option>
+          <option value="ta-IN">Tamil (ta-IN)</option>
+          <option value="te-IN">Telugu (te-IN)</option>
+          <option value="bn-IN">Bengali (bn-IN)</option>
+          <option value="mr-IN">Marathi (mr-IN)</option>
+          <option value="gu-IN">Gujarati (gu-IN)</option>
+          <option value="kn-IN">Kannada (kn-IN)</option>
+          <option value="ml-IN">Malayalam (ml-IN)</option>
+          <option value="pa-IN">Punjabi (pa-IN)</option>
+          <option value="en-IN">English (en-IN)</option>
+        </select>
+      </label>
+      <label>
+        <span>Speaker</span>
+        <input type="text" id="speaker" placeholder="meera" value="meera" />
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <button id="generate-btn">Generate Audio</button>
+    <button id="save-btn" disabled>Save to File</button>
+    <div class="status" id="status">Ready</div>
+    <audio id="player" controls style="display:none;"></audio>
+  </div>
+
+  <div class="card">
+    <h2>Config</h2>
+    <p style="font-size: 0.875rem; color: var(--muted);">
+      Set <code style="background: var(--bg); padding: 2px 6px; border-radius: 4px;">BULBUL_API_KEY</code> env var or edit
+      <code style="background: var(--bg); padding: 2px 6px; border-radius: 4px;">~/.config/bulbul-studio/config.toml</code>.
+    </p>
+  </div>
+
+  <footer>
+    <a href="https://github.com/sovereign-shovels/bulbul-studio">GitHub</a> ·
+    Part of <a href="https://github.com/sovereign-shovels">sovereign-shovels</a>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
