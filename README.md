@@ -11,6 +11,23 @@ Best-effort community shovel — no SLA, no roadmap commitments.
 
 ---
 
+## Architecture
+
+```
+┌─────────────────┐     ┌──────────────┐     ┌─────────────────┐
+│   HTML/JS       │────▶│   Tauri      │────▶│   Bulbul v3     │
+│   frontend      │     │   backend    │     │   API           │
+│  (voice picker, │     │  (Rust +     │     │  (TTS audio)    │
+│   text area,    │     │   reqwest)   │     └─────────────────┘
+│   SSML toggle)  │     └──────────────┘              │
+└─────────────────┘            │                       ▼
+                               ▼                ┌──────────────┐
+                        ┌──────────────┐        │  Audio file  │
+                        │   rfd save   │        │  (WAV/MP3)   │
+                        │   dialog     │        └──────────────┘
+                        └──────────────┘
+```
+
 ## What this is
 
 Bulbul v3 is the best Indic TTS available. The only way to use it today is via API calls — which works for engineers but locks out the actual buyers: content creators, podcasters, audiobook producers, e-learning teams.
@@ -94,6 +111,8 @@ export BULBUL_STUDIO_SPEAKER="meera"
 4. Click **Generate Audio**.
 5. Preview the audio in the built-in player.
 6. Click **Save to File** to export as WAV.
+
+**Verified:** `cargo test` passes (1 test). Build completes cleanly.
 
 ---
 
